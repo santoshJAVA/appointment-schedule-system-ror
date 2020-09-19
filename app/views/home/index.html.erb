@@ -1,0 +1,17 @@
+<h1>Welcome to the System</h1>
+<% if patient_signed_in? %>
+  <h2>Patient Section</h2>
+  <ul>
+    <li><%= link_to 'Appointment Section', dashboard_patients_path %></li>
+  </ul>
+<% elsif doctor_signed_in? %>
+  <h2>Doctor Section</h2>
+  <ul>
+    <li><%= link_to 'Appointment Section', dashboard_doctors_path %></li>
+  </ul>
+<% else %>
+  <ul>
+    <li><%= link_to "Patient Sign up/Login", new_patient_session_path %></li>
+    <li><%= link_to "Doctor Sign up/Login", new_doctor_session_path %></li>
+  </ul>
+<% end %>

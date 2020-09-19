@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Appointment date:</strong>
+  <%= date_time_format(@appointment.appointment_date) %>
+</p>
+
+<%= link_to 'Back', dashboard_patients_path %>

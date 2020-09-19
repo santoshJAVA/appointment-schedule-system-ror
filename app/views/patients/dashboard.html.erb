@@ -1,0 +1,53 @@
+<h1>List of Doctors</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Doctor Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @doctors.each do |doctor| %>
+      <tr>
+        <td><%= doctor.name %></td>
+        <td><%= link_to 'Schedule Appointmant', new_appointment_path(doctor_id: doctor.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br /> <hr />
+<h1>Scheduled Appointments</h1>
+<% if @appointments.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Doctor Name</th>
+        <th>Appointment Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @appointments.each do |appointment| %>
+        <tr>
+          <td><%= appointment.doctor.name %></td>
+          <td><%= date_time_format(appointment.appointment_date) %></td>
+          <td>
+            <% if is_eligible_for_cancel?(appointment) %>
+              <%= link_to 'Cancel Appointmant', appointment_path(appointment), method: :delete, data: {confirm: 'Are you sure to cancel appointment?' } %></td>
+            <% else %>
+              <%= link_to 'Cancel Appointmant', '', data: {confirm: "Sorry. You can't cancel appointment as it more than 1 hour since created"  } %></td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3><%= I18n.patient.appointment.no_data%></h3>
+<% end %>
+
+
+
+
+

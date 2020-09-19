@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AppointmentScheduleSystem</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">Appointment Schedule System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <p class="navbar-text float-right">
+              <% if patient_signed_in? %>
+                Logged in as <strong><%= current_patient.email %></strong>.
+                <%= link_to 'Edit profile', edit_patient_registration_path, :class => 'navbar-link' %> |
+                <%= link_to "Logout", destroy_patient_session_path, method: :delete, :class => 'navbar-link'  %>
+              <% elsif doctor_signed_in? %>
+                Logged in as <strong><%= current_doctor.email %></strong>.
+                <%= link_to 'Edit profile', edit_doctor_registration_path, :class => 'navbar-link' %> |
+                <%= link_to "Logout", destroy_doctor_session_path, method: :delete, :class => 'navbar-link'  %>
+              <% end %>
+            </p>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+    <footer>
+      <div class="container">
+        Appointmant Management <%= Time.now.year %>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  </body>
+</html>

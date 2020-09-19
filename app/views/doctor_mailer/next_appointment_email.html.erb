@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello <%= @doctor.name %></p>
+    <p>
+      Please find Appointment details below<br>
+      --------------------------
+    </p>
+    <p>Date & Time: <%= date_time_format(@appointment.appointment_date) %></p>
+    <p>Patient: <%= @appointment.patient.name || @appointment.patient.email %></p>
+  </body>
+</html>

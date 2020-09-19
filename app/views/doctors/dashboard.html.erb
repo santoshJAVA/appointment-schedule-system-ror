@@ -1,0 +1,26 @@
+<h1>Appointments</h1>
+
+<% if @appointments.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Appointment date</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @appointments.each do |appointment| %>
+        <tr>
+          <td><%= appointment.patient.name || patient.email %></td>
+          <td><%= date_time_format(appointment.appointment_date) %></td>
+          <td><%= link_to 'Accept', accept_appointment_appointment_path(appointment), method: :patch %></td>
+          <td><%= link_to 'Reject', reject_appointment_appointment_path(appointment), method: :patch %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No Data Available</h3>
+<% end %>
+
