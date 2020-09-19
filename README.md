@@ -1,24 +1,19 @@
-# README
+# Appointment Schedule System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby Version - 2.7.0
 
-Things you may want to cover:
+Rails Version - 6.0.3
 
-* Ruby version
+Please perform following steps for setup.
 
-* System dependencies
+1. install ruby version using rvm
+2. clone the repository. --> git clone https://github.com/santoshJAVA/appointment-schedule-system-ror.git
+3. bundle install
+4. Update database.yml as per your DB configuration
+5. rails db:create
+6. rails db:migrate
+7. rails db:seed
+8. start rails server. --> rails s
+9. start sidekiq --> sidekiq -q default -q mailers
+10. hit http://localhost:3000/ in browser
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
