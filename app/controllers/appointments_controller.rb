@@ -29,12 +29,11 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       if @appointment.accepted!
         mail_schedule_time = @appointment.appointment_date - 1.hour
-        DoctorMailer.next_appointment_email(@appointment.doctor,@appointment).delay_for(wait: mail_schedule_time)
-        PatientMailer.next_appointment_email(@appointment.patient,@appointment).delay_for(wait: mail_schedule_time)
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully accepted.' }
-        format.json { render :show, status: :created, location: @appointment }
+        DoctorMailer.next_appointment_email(@appointment.doctor,@appointment).deliver_later(wait_until: mail_schedule_time)
+        PatientMailer.next_appointment_email(@appointment.patient,@appointment).deliver_later(wait_until: mail_schedule_time)
+        format.html { redirect_to dashboard_doctors_path, notice: 'Appointment was successfully accepted.' }
       else
-        format.html { render :new }
+        format.html { redirect_to dashboard_doctors_path }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
@@ -43,10 +42,9 @@ class AppointmentsController < ApplicationController
   def reject_appointment
     respond_to do |format|
       if @appointment.rejected!
-        format.html { redirect_to @appointment, notice: 'Appointment was rejected.' }
-        format.json { render :show, status: :created, location: @appointment }
+        format.html { redirect_to dashboard_doctors_path, notice: 'Appointment was rejected.' }
       else
-        format.html { render :new }
+        format.html { redirect_to dashboard_doctors_path }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end

@@ -1,4 +1,5 @@
 class DoctorMailer < ApplicationMailer
+  helper :application
   def next_appointment_email(doctor,appointment)
     @doctor = doctor
     @appointment = appointment
